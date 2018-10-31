@@ -1,0 +1,67 @@
+---
+spring:
+  datasource:
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    hikari:
+      connection-timeout: 30000
+      auto-commit: true
+      max-lifetime: 1800000
+      pool-name: DatebookHikariCP
+      minimum-idle: 5
+      connection-test-query: SELECT 1
+      maximum-pool-size: 15
+      idle-timeout: 30000
+    username: root
+  kafka:
+    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
+    consumer:
+      enable-auto-commit: false
+      auto-commit-interval: 100ms
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: myGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session.timeout.ms: 15000
+  devtools:
+    restart:
+      additional-paths: src/main/java
+      enabled: true
+  redis:
+    password:
+    database: 1
+    port: 6379
+    host: 127.0.0.1
+    timeout: 2000
+server:
+  port: 8080
+debug: true
+#kakfa config
+kafka:
+  topic:
+    group-id: topicGroupId
+    topic-name:
+    - topic1
+    - topic2
+    - topic3
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.andy.vs.entity
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      table-underline: true
+      id-type: uuid
+    refresh: true
