@@ -29,9 +29,8 @@ public class IndicatorService {
 
     @KafkaListener(topics = "#{kafkaTopicName}", groupId = "#{topicGroupId}")
     public void processMessage(ConsumerRecord<Integer, String> record) {
-        log.info("kafka processMessage start");
-        log.info("processMessage, topic = {}, msg = {}", record.topic(), record.value());
-        //properties.getProperties();
+        log.info("kafka receive processMessage start");
+        log.info("receive processMessage, topic = {}, msg = {}", record.topic(), record.value());
         if (record.topic().equals("Topic1")) {
             log.info("Topic1 -- " + record.toString());
         } else if (record.topic().equals("Topic2")) {
@@ -40,11 +39,9 @@ public class IndicatorService {
             log.info("Topic3 -- " + record.toString());
         } else if (record.topic().equals("my-replicated-topic")) {
             log.info(record.topic() + " -- " + record.toString());
-        } else {
-            log.info("kafka other");
         }
 
-        log.info("kafka processMessage end");
+        log.info("kafka receive processMessage end");
     }
 
     public void sendMessage(String topic, String data) {

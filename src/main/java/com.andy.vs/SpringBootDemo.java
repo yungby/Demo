@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("com.andy.vs.dao")
-public class App {
+public class SpringBootDemo {
     public static void main (String [] args){
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(SpringBootDemo.class,args);
     }
 }
